@@ -43,7 +43,7 @@ impl App {
     pub fn new(snippets: Vec<Snippet>) -> Self {
         let filtered_indices = (0..snippets.len()).collect();
         Self {
-            all_snippets: Vec::new(),
+            all_snippets: snippets,
             filtered_indices,
             search_query: String::new(),
             selected: 0,
@@ -96,7 +96,7 @@ impl App {
         }
     }
 
-    pub fn extract_variants(command: &str) -> Vec<String> {
+    pub fn extract_variables(command: &str) -> Vec<String> {
         let mut vars = Vec::new();
         let mut rest = command;
         while let Some(start) = rest.find("{{") {
