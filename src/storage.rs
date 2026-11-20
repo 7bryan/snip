@@ -41,6 +41,7 @@ pub fn save_snippets(snippets: &[Snippet]) -> Result<()> {
     };
     let toml_string =
         toml::to_string_pretty(&wrapper).with_context(|| format!("Failed to write {:?}", path))?;
+    fs::write(&path, toml_string).with_context(|| format!("Failed to write {:?}", path))?;
     Ok(())
 }
 
