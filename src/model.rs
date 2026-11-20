@@ -99,7 +99,7 @@ impl App {
     pub fn extract_variants(command: &str) -> Vec<String> {
         let mut vars = Vec::new();
         let mut rest = command;
-        while let Some(start) = rest.find('{{') {
+        while let Some(start) = rest.find("{{") {
             let after_open = &rest[start + 2..];
             if let Some(end) = after_open.find("}}") {
                 let name = after_open[..end].to_string();
