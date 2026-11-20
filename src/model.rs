@@ -95,4 +95,31 @@ impl App {
             }
         }
     }
+
+    pub fn extract_variants(command: &str) -> Vec<String> {
+        let mut vars = Vec::new();
+        let mut rest = command;
+        while let Some(start) = rest.find('{{') {
+            let after_open = &rest[start + 2..];
+            if let Some(end) = after_open.find("}}") {
+                let name = after_open[..end].to_string();
+                if !name.is_empty() && !vars.contains(&name) {
+                    vars.push(name);
+                }
+                rest = &rest[start + 2..];
+            } else {
+                break;
+            }
+        }
+        vars
+    }
+
+    pub fn resolve_command(command: &str, cars: &[String], values: &[String]) -> String {
+        let mut resolved = command.to_string();
+        for (var, val) in cars.iter().zip(values.iter()) {
+            let token = format!("{{{{{}}}}}", var);
+            resolved = resolved.replace(&token, val);
+        }
+        resolved
+    }
 }
