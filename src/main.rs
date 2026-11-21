@@ -28,7 +28,7 @@ enum Commands {
         #[arg(short, long)]
         tag: Option<String>,
     },
-    /// Open snippets.toml in your default editor
+    /// Open snippets.toml in default editor
     Edit,
     /// Print the path to snippets.toml
     Path,
@@ -124,7 +124,7 @@ fn event_loop(
 
         if let Event::Key(key) = event::read()? {
             // Crucial on Windows: Crossterm fires both Press and Release events.
-            // Ignore Release events so keys don't type twice!
+            // Ignore Release events so keys don't type twice
             if key.kind != KeyEventKind::Press {
                 continue;
             }
