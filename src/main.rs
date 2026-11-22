@@ -32,6 +32,7 @@ enum Commands {
     Edit,
     /// Print the path to snippets.toml
     Path,
+    Help,
 }
 
 /// Ensures Windows Terminal raw mode is always cleaned up on exit
@@ -73,6 +74,14 @@ fn main() -> Result<()> {
                 }
                 println!("• {}  [{}]\n  {}\n", s.title, s.tags.join(", "), s.command);
             }
+            return Ok(());
+        }
+        Some(Commands::Help) => {
+            println!("Usage: ");
+            println!("list - List all saved snippets");
+            println!("edit - Open snippets.toml in default editor");
+            println!("path - Print the path to snippets.toml");
+            println!("help - Show this help message");
             return Ok(());
         }
         None => run_tui()?,
